@@ -3,20 +3,28 @@ const steam_2 = new SteamAPI('B90F6E491B41ED72034BFE0DC74B90F7');
 
 async function getSteamLvl(id) {
   return new Promise(function (resolve, reject) {
-    steam_2.getUserLevel(id).then(data => resolve(data))
+    steam_2.getUserLevel(id).then(data => resolve(data));
   })
 }
 
 async function getSteamFriends(id) {
   return new Promise(function (resolve, reject) {
-    steam_2.getUserFriends(id).then(data => resolve(data))
+    steam_2.getUserFriends(id).then(data => resolve(data));
   })
 }
 
 async function getUserInfo(id) {
   return new Promise(function (resolve, reject) {
     steam_2.getUserSummary(id).then(data => {
-      resolve(data)
+      resolve(data);
+    })
+  })
+}
+
+async function getUserRecentGames(id) {
+  return new Promise(function (resolve, reject) {
+    steam_2.getUserRecentGames(id).then(data => {
+      resolve(data);
     })
   })
 }
@@ -33,7 +41,10 @@ async function getSteamInfo() {
             friends.map((value, index) => {
               summary.friends++;
             })
-            resolve(summary)
+            getUserRecentGames(id).then(games => {
+              summary.games = games
+              resolve(summary)
+            })
           })
         })
       });
