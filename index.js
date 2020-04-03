@@ -22,13 +22,22 @@ app.get("/weather", function (req, res) {
 app.get("/Steam", function (req, res) {
   steam.getSteamInfo().then(data => {
     console.log("data => ", data);
-    var nick = data.nickname;
-    var real = data.realName;
-    var country = data.countryCode;
-    var lvl = data.level;
-    var nbrFriends = data.friends;
-    var image = data.avatar.medium
-    res.render("steam", { nick: nick, real: real, country: country, lvl: lvl, nbrFriends: nbrFriends, img: image });
+
+    res.render("steam", {
+      nick: data.nickname,
+      real: data.realName,
+      country: data.countryCode,
+      lvl: data.level,
+      nbrFriends: data.friends,
+      img: data.avatar.medium,
+      game_name_1: data.games[0].name,
+      game_img_1: data.games[0].img,
+      game_name_2: data.games[1].name,
+      game_img_2: data.games[1].img,
+      game_name_3: data.games[2].name,
+      game_img_3: data.games[2].img,
+      totalGames: data.ownedGames
+    });
   });
 });
 

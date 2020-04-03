@@ -29,10 +29,26 @@ async function getUserRecentGames(id) {
   })
 }
 
+async function getUserOwnedGames(id) {
+  return new Promise(function (resolve, reject) {
+    steam_2.getUserOwnedGames(id).then(data => {
+      resolve(data)
+    })
+  })
+}
+
+function cleanSum(summary) {
+  delete summary.gameServerIP;
+  delete summary.gameServerSteamID;
+  delete summary.gameExtraInfo;
+  delete summary.gameID;
+  return summary;
+}
+
 async function getSteamInfo() {
   return new Promise(function (resolve, reject) {
     steam_2.resolve('https://steamcommunity.com/id/LuluLaGlue').then(id => {
-      console.log(id);
+      // id = '76561198180216413'
       steam_2.getUserSummary(id).then(summary => {
         getSteamLvl(summary.steamID).then(lvl => {
           summary.level = lvl;
@@ -42,8 +58,23 @@ async function getSteamInfo() {
               summary.friends++;
             })
             getUserRecentGames(id).then(games => {
-              summary.games = games
-              resolve(summary)
+              summary.games = [];
+              games.map((value, index) => {
+                var game = {
+                  name: value.name,
+                  img: value.logoURL
+                }
+                summary.games.push(game)
+                return summary
+              })
+              getUserOwnedGames(id).then(data => {
+                summary.ownedGames = 0;
+                data.map((value, index) => {
+                  summary.ownedGames++;
+                })
+                summary = cleanSum(summary)
+                resolve(summary)
+              })
             })
           })
         })
