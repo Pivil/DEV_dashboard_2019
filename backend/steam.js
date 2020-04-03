@@ -29,7 +29,10 @@ async function getSteamInfo() {
         getSteamLvl(summary.steamID).then(lvl => {
           summary.level = lvl;
           getSteamFriends(id).then(friends => {
-            summary.friends = friends
+            summary.friends = 0;
+            friends.map((value, index) => {
+              summary.friends++;
+            })
             resolve(summary)
           })
         })

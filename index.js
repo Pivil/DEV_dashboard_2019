@@ -26,11 +26,9 @@ app.get("/Steam", function (req, res) {
     var real = data.realName;
     var country = data.countryCode;
     var lvl = data.level;
-    var nbrFriends = 0;
-    data.friends.map((value, index) => {
-      nbrFriends++;
-    })
-    res.render("steam", { nick: nick, real: real, country: country, lvl: lvl, nbrFriends: nbrFriends });
+    var nbrFriends = data.friends;
+    var image = data.avatar.medium
+    res.render("steam", { nick: nick, real: real, country: country, lvl: lvl, nbrFriends: nbrFriends, img: image });
   });
 });
 
