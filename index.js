@@ -4,6 +4,10 @@ const weather = require("./backend/weather.js");
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
+  res.render("templates/home");
+});
+
+app.get("/weather", function(req, res) {
   weather.getWeather().then(data => {
     console.log("data => ", data);
     var temp = data.main.temp;
