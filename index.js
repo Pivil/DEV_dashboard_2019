@@ -6,20 +6,16 @@ const steam = require("./backend/steam");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
 
-app.get("/", function (req, res) {
-  res.render("templates/home");
-});
-
-app.get("/weather", function (req, res) {
+app.get("/", function(req, res) {
   weather.getWeather().then(data => {
     console.log("data => ", data);
     var temp = data.main.temp;
     var city = data.name;
-    res.render("weather", { temp: temp, city: city });
+    res.render("pages/weather", { temp: temp, city: city });
   });
 });
 
-app.get("/Steam", function (req, res) {
+app.get("/Steam", function(req, res) {
   steam.getSteamInfo().then(data => {
     console.log("data => ", data);
     var nick = data.nickname;
@@ -27,11 +23,18 @@ app.get("/Steam", function (req, res) {
     var country = data.countryCode;
     var lvl = data.level;
     var nbrFriends = data.friends;
-    var image = data.avatar.medium
-    res.render("steam", { nick: nick, real: real, country: country, lvl: lvl, nbrFriends: nbrFriends, img: image });
+    var image = data.avatar.medium;
+    res.render("pages/steam", {
+      nick: nick,
+      real: real,
+      country: country,
+      lvl: lvl,
+      nbrFriends: nbrFriends,
+      img: image
+    });
   });
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
   console.log("Example app listening on port 3000!");
 });
