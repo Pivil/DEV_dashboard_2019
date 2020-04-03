@@ -24,8 +24,9 @@ app.get("/Steam", function (req, res) {
     var nick = data.nickname;
     var real = data.realName;
     var country = data.countryCode;
+    var lvl = data.level
     // res.send("Surnom: " + nick + "\nVrai nom: " + real);
-    res.render("steam", { nick: nick, real: real, country: country });
+    res.render("steam", { nick: nick, real: real, country: country, lvl: lvl });
   });
 });
 
