@@ -5,11 +5,11 @@ const steam = require("./backend/steam");
 
 app.set("view engine", "ejs");
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.render("templates/home");
 });
 
-app.get("/weather", function(req, res) {
+app.get("/weather", function (req, res) {
   weather.getWeather().then(data => {
     console.log("data => ", data);
     var temp = data.main.temp;
@@ -18,8 +18,8 @@ app.get("/weather", function(req, res) {
   });
 });
 
-app.get("/Steam", function(req, res) {
-  steam.getSteam().then(data => {
+app.get("/Steam", function (req, res) {
+  steam.getSteamID().then(data => {
     console.log("data => ", data);
     var nick = data.nickname;
     var real = data.realName;
@@ -28,6 +28,6 @@ app.get("/Steam", function(req, res) {
   });
 });
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log("Example app listening on port 3000!");
 });
