@@ -28,6 +28,7 @@ app.get("/Steam", function (req, res) {
       lvl: data.level,
       nbrFriends: data.friends,
       img: data.avatar.medium,
+
       game_name_1: data.games[0].name,
       game_img_1: data.games[0].img,
       game_playTime_1: data.games[0].playTime,
@@ -37,6 +38,26 @@ app.get("/Steam", function (req, res) {
       game_name_3: data.games[2].name,
       game_img_3: data.games[2].img,
       game_playTime_3: data.games[2].playTime,
+
+      mostPlayed_recent_name_1: data.mostPlayed_recent[0].name,
+      mostPlayed_recent_img_1: data.mostPlayed_recent[0].img,
+      mostPlayed_recent_playTime_1: data.mostPlayed_recent[0].playTime,
+      mostPlayed_recent_name_2: data.mostPlayed_recent[1].name,
+      mostPlayed_recent_img_2: data.mostPlayed_recent[1].img,
+      mostPlayed_recent_playTime_2: data.mostPlayed_recent[1].playTime,
+      mostPlayed_recent_name_3: data.mostPlayed_recent[2].name,
+      mostPlayed_recent_img_3: data.mostPlayed_recent[2].img,
+      mostPlayed_recent_playTime_3: data.mostPlayed_recent[2].playTime,
+
+      ownedGames_name_1: data.allGames[0].name,
+      ownedGames_img_1: data.allGames[0].img,
+      ownedGames_playTime_1: data.allGames[0].playTime,
+      ownedGames_name_2: data.allGames[1].name,
+      ownedGames_img_2: data.allGames[1].img,
+      ownedGames_playTime_2: data.allGames[1].playTime,
+      ownedGames_name_3: data.allGames[2].name,
+      ownedGames_img_3: data.allGames[2].img,
+      ownedGames_playTime_3: data.allGames[2].playTime,
       totalGames: data.ownedGames
     });
   });

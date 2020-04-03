@@ -45,6 +45,10 @@ function cleanSum(summary) {
   return summary;
 }
 
+function compare(a, b) {
+  return (b.playTime - a.playTime)
+}
+
 async function getSteamInfo() {
   return new Promise(function (resolve, reject) {
     steam_2.resolve("https://steamcommunity.com/id/pivil").then(id => {
@@ -68,11 +72,22 @@ async function getSteamInfo() {
                 summary.games.push(game);
                 return summary;
               });
+              summary.mostPlayed_recent = summary.games;
+              summary.games.sort((a, b) => compare(a, b))
               getUserOwnedGames(id).then(data => {
                 summary.ownedGames = 0;
+                summary.allGames = [];
                 data.map((value, index) => {
+                  var game = {
+                    name: value.name,
+                    img: value.logoURL,
+                    playTime: value.playTime
+                  };
+                  summary.allGames.push(game)
                   summary.ownedGames++;
+                  return summary
                 });
+                summary.allGames.sort((a, b) => compare(a, b))
                 summary = cleanSum(summary);
                 resolve(summary);
               });
