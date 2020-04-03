@@ -58,6 +58,8 @@ app.get("/Steam", function (req, res) {
       ownedGames_name_3: data.allGames[2].name,
       ownedGames_img_3: data.allGames[2].img,
       ownedGames_playTime_3: data.allGames[2].playTime,
+
+      gamingTime: data.gamingTime,
       totalGames: data.ownedGames
     });
   });

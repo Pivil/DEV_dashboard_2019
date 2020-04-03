@@ -76,6 +76,7 @@ async function getSteamInfo() {
               summary.games.sort((a, b) => compare(a, b))
               getUserOwnedGames(id).then(data => {
                 summary.ownedGames = 0;
+                summary.gamingTime = 0;
                 summary.allGames = [];
                 data.map((value, index) => {
                   var game = {
@@ -83,7 +84,8 @@ async function getSteamInfo() {
                     img: value.logoURL,
                     playTime: value.playTime
                   };
-                  summary.allGames.push(game)
+                  summary.allGames.push(game);
+                  summary.gamingTime += game.playTime;
                   summary.ownedGames++;
                   return summary
                 });
