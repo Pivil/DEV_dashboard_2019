@@ -7,15 +7,31 @@ async function getSteamLvl(id) {
   })
 }
 
-async function getSteamID() {
+async function getSteamFriends(id) {
   return new Promise(function (resolve, reject) {
-    steam_2.resolve('https://steamcommunity.com/id/mimicmi').then(id => {
+    steam_2.getUserFriends(id).then(data => resolve(data))
+  })
+}
+
+async function getUserInfo(id) {
+  return new Promise(function (resolve, reject) {
+    steam_2.getUserSummary(id).then(data => {
+      resolve(data)
+    })
+  })
+}
+
+async function getSteamInfo() {
+  return new Promise(function (resolve, reject) {
+    steam_2.resolve('https://steamcommunity.com/id/LuluLaGlue').then(id => {
       console.log(id);
       steam_2.getUserSummary(id).then(summary => {
         getSteamLvl(summary.steamID).then(lvl => {
           summary.level = lvl;
-          console.log(summary);
-          resolve(summary)
+          getSteamFriends(id).then(friends => {
+            summary.friends = friends
+            resolve(summary)
+          })
         })
       });
     });
@@ -25,6 +41,7 @@ async function getSteamID() {
 
 
 module.exports = {
-  getSteamID: getSteamID,
-  getSteamLvl: getSteamLvl
+  getSteamInfo: getSteamInfo,
+  getSteamLvl: getSteamLvl,
+  getUserInfo: getUserInfo
 }
