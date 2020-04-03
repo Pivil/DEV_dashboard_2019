@@ -2,19 +2,19 @@ const SteamAPI = require("steamapi");
 const steam_2 = new SteamAPI("B90F6E491B41ED72034BFE0DC74B90F7");
 
 async function getSteamLvl(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.getUserLevel(id).then(data => resolve(data));
   });
 }
 
 async function getSteamFriends(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.getUserFriends(id).then(data => resolve(data));
   });
 }
 
 async function getUserInfo(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.getUserSummary(id).then(data => {
       resolve(data);
     });
@@ -22,7 +22,7 @@ async function getUserInfo(id) {
 }
 
 async function getUserRecentGames(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.getUserRecentGames(id).then(data => {
       resolve(data);
     });
@@ -30,7 +30,7 @@ async function getUserRecentGames(id) {
 }
 
 async function getUserOwnedGames(id) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.getUserOwnedGames(id).then(data => {
       resolve(data);
     });
@@ -46,7 +46,7 @@ function cleanSum(summary) {
 }
 
 async function getSteamInfo() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     steam_2.resolve("https://steamcommunity.com/id/pivil").then(id => {
       // id = '76561198180216413'
       steam_2.getUserSummary(id).then(summary => {
@@ -62,7 +62,8 @@ async function getSteamInfo() {
               games.map((value, index) => {
                 var game = {
                   name: value.name,
-                  img: value.logoURL
+                  img: value.logoURL,
+                  playTime: value.playTime
                 };
                 summary.games.push(game);
                 return summary;
