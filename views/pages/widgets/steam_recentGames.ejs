@@ -1,0 +1,42 @@
+<h3>Jeux Recents :</h3>
+
+<div class="card-group">
+  <div class="card">
+    <img class="card-img-top" src=<%= game_img_1 %> alt=<%=game_name_1 %>>
+    <div class="card-body">
+      <h5 class="card-title"><%=game_name_1 %></h5>
+      <p class="card-text">
+        <small class="text-muted"
+          >Vous avez joué <%= Number.parseFloat(game_playTime_1 /
+          60).toPrecision(4) %> heure(s) à ce jeu</small
+        >
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src=<%= game_img_2 %> alt=<%=game_name_2 %>>
+    <div class="card-body">
+      <h5 class="card-title"><%=game_name_2 %></h5>
+
+      <p class="card-text">
+        <small class="text-muted"
+          >Vous avez joué <%= Number.parseFloat(game_playTime_2 /
+          60).toPrecision(4) %> heure(s) à ce jeu</small
+        >
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src=<%= game_img_3 %> alt=<%=game_name_3 %>>
+    <div class="card-body">
+      <h5 class="card-title"><%=game_name_3 %></h5>
+
+      <p class="card-text">
+        <small class="text-muted"
+          >Vous avez joué <%= Number.parseFloat(game_playTime_3 /
+          60).toPrecision(4) %> heure(s) à ce jeu</small
+        >
+      </p>
+    </div>
+  </div>
+</div>
