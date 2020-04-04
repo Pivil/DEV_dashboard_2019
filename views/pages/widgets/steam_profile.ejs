@@ -1,18 +1,13 @@
-<h3>Profil :</h3>
+<div class="card text-center">
+  <div class="widgetTitle"><h4>Profile</h4></div>
 
-<div class="card-group">
-  <div class="card">
-    <img class="card-img-top" src=<%= img %> alt=<%=nick %>>
-    <div class="card-body">
-      <h5 class="card-title"><%=nick %></h5>
-
-      <p class="card-text">
-        Vous êtes niveau <%= lvl %>
-      </p>
-      <p class="card-text">
-        Vous avez joue <%= Number.parseFloat(gamingTime /
-        60).toPrecision(4) %>h.
-      </p>
-    </div>
+  <img class="card-img-top" src=<%= img %> alt=<%=nick %>>
+  <div class="card-body">
+    <h6 class="card-title"><%= nick %></h6>
+    <p class="card-text">
+      Vous êtes niveau <%= lvl %> <br />
+      Vous avez joue <%= Number.parseFloat(gamingTime / 60).toPrecision(4) %>h
+      en tout
+    </p>
   </div>
 </div>

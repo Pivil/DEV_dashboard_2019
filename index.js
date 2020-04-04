@@ -6,21 +6,21 @@ const steam = require("./backend/steam");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
 
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
   res.render("pages/home");
 });
 
-app.get("/weather", function (req, res) {
+app.get("/weather", function(req, res) {
   weather.getWeather().then(data => {
     var temp = data.main.temp;
     var city = data.name;
-    res.render("pages/weather", { temp: temp, city: city });
+    res.render("pages/weather", { data: data });
   });
 });
 
-app.get("/Steam", function (req, res) {
+app.get("/Steam", function(req, res) {
   steam.getSteamInfo().then(data => {
-    console.log(data)
+    console.log(data);
     res.render("pages/steam", {
       nick: data.nickname,
       real: data.realName,
@@ -65,6 +65,6 @@ app.get("/Steam", function (req, res) {
   });
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
   console.log("Example app listening on port 3000!");
 });

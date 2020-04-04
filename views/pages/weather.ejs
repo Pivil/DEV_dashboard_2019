@@ -1,3 +1,6 @@
 <%- include('../partials/menu'); %>
-
-<p>Température actuelle à <b><%= city %></b>: <%= temp %></p>
+<div class="row">
+  <div class="row col-4 widget">
+    <%- include('./widgets/weather_current'); %>
+  </div>
+</div>
