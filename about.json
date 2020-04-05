@@ -1,5 +1,8 @@
 {
   "weather": {
-    "city": "Grenoble"
+    "city": "London"
+  },
+  "steam": {
+    "profile": "pivil"
   }
 }

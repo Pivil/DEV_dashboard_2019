@@ -15,6 +15,10 @@
   text-align: center;
 }
 
+.config {
+  margin:2em;
+}
+
 .column {
   margin-left: 5em;
 }

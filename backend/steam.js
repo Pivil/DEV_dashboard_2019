@@ -49,9 +49,9 @@ function compare(a, b) {
   return (b.playTime - a.playTime)
 }
 
-async function getSteamInfo() {
+async function getSteamInfo(profile) {
   return new Promise(function (resolve, reject) {
-    steam_2.resolve("https://steamcommunity.com/id/pivil").then(id => {
+    steam_2.resolve("https://steamcommunity.com/id/"+profile).then(id => {
       // id = '76561198180216413'
       steam_2.getUserSummary(id).then(summary => {
         getSteamLvl(summary.steamID).then(lvl => {

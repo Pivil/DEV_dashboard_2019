@@ -3,6 +3,7 @@ const app = express();
 const weather = require("./backend/weather.js");
 const steam = require("./backend/steam");
 const editJsonFile = require("edit-json-file");
+var bodyParser = require("body-parser");
 
 
 file = editJsonFile("./about.json", {
@@ -13,8 +14,34 @@ file = editJsonFile("./about.json", {
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.get("/", function(req, res) {
   res.render("pages/home");
+});
+
+app.get("/config", function(req, res) {
+  var weatherCity = file.get("weather.city");
+  var steamProfile = file.get("steam.profile");
+
+
+  res.render("pages/config", {
+    weatherCity: weatherCity,
+    steamProfile: steamProfile
+  });
+});
+
+app.post("/submit_form", function(req, res) {
+  var weatherCity = req.body.weatherCity;
+  var steamProfile = req.body.steamProfile;
+  file.set("weather", {
+    city: weatherCity
+  })
+  file.set("steam", {
+    profile: steamProfile
+  })
+  res.redirect("/config");
 });
 
 app.get("/weather", function(req, res) {
@@ -27,7 +54,8 @@ app.get("/weather", function(req, res) {
 });
 
 app.get("/Steam", function(req, res) {
-  steam.getSteamInfo().then(data => {
+  var profile = file.get("steam.profile");
+  steam.getSteamInfo(profile).then(data => {
     console.log(data);
     res.render("pages/steam", {
       nick: data.nickname,

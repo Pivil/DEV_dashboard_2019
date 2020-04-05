@@ -1,0 +1,29 @@
+<%- include('../partials/menu'); %>
+<form action="/submit_form" method="post">
+   <div class="row">
+        <div class="card config">
+
+            <h3>Weather</h3>
+            <div class="form-group row">
+                <label for="weatherCity" class="col-sm-3 col-form-label">Ville:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="weatherCity" name="weatherCity" value=<%= weatherCity %>>  
+                </div>
+            </div>
+        </div>
+
+        <div class="card config">
+            <h3>Steam</h3>
+            <div class="form-group row">
+                <label for="steamProfile" class="col-sm-3 col-form-label">Profile:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="steamProfile" name="steamProfile" value=<%= steamProfile %>>  
+                </div>
+            </div>
+        </div>
+
+  
+    </div> 
+    <button type="submit">Enregistrer</button>
+
+</form>
