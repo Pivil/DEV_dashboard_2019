@@ -2,6 +2,13 @@ const express = require("express");
 const app = express();
 const weather = require("./backend/weather.js");
 const steam = require("./backend/steam");
+const editJsonFile = require("edit-json-file");
+
+
+file = editJsonFile("./about.json", {
+  autosave: true
+});
+
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
@@ -11,7 +18,8 @@ app.get("/", function(req, res) {
 });
 
 app.get("/weather", function(req, res) {
-  weather.getWeather().then(data => {
+  var city = file.get("weather.city");
+  weather.getWeather(city).then(data => {
     var temp = data.main.temp;
     var city = data.name;
     res.render("pages/weather", { data: data });
