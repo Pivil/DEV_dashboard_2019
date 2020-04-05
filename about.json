@@ -1,6 +1,7 @@
 {
   "weather": {
-    "city": "London"
+    "city": "Lyon",
+    "show": true
   },
   "steam": {
     "profile": "pivil"

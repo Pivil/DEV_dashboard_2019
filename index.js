@@ -18,12 +18,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", function(req, res) {
-  res.render("pages/home");
+  var weatherShow = file.get("weather.show");
+    if (weatherShow == true) {
+      var weatherData = weather.getWeather(file.get("weather.city"));
+    } else {
+      weatherData == null;
+    }
+
+  res.render("pages/home", { weatherData: weatherData});
 });
 
 app.get("/config", function(req, res) {
   var weatherCity = file.get("weather.city");
   var steamProfile = file.get("steam.profile");
+
 
 
   res.render("pages/config", {
@@ -33,10 +41,13 @@ app.get("/config", function(req, res) {
 });
 
 app.post("/submit_form", function(req, res) {
-  var weatherCity = req.body.weatherCity;
-  var steamProfile = req.body.steamProfile;
+  console.log(req.body);
+  var weatherCity = req.body.weatherCity,
+    weatherShow = req.body.weatherShow == 'on' ? true : false,
+    steamProfile = req.body.steamProfile;
   file.set("weather", {
-    city: weatherCity
+    city: weatherCity,
+    show: weatherShow
   })
   file.set("steam", {
     profile: steamProfile
@@ -101,6 +112,6 @@ app.get("/Steam", function(req, res) {
   });
 });
 
-app.listen(3000, function() {
-  console.log("Example app listening on port 3000!");
+app.listen(8080, function() {
+  console.log("Example app listening on port 8080!");
 });
