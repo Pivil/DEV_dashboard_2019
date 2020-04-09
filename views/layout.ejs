@@ -1,0 +1,24 @@
+<%- include('partials/header'); %> <%- include('partials/menu') %>
+<div class="row" style="border: solid 1px black">
+  <div class="row col-6">
+    <%- steamProfile %>
+  </div>
+  <div class="row col-6">
+    <%- steamGames %>
+  </div>
+</div>
+<div class="row">
+  <div class="row col-10">
+    <canvas id="pie-chart" width="800" height="450"></canvas>
+
+  </div>
+  <div class="row col-2" style="border: solid 1px blue">
+    <%- weather %>
+
+  </div>
+
+</div>
+
+
+
+<%- body %>

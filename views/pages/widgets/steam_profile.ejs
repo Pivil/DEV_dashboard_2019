@@ -1,13 +1,13 @@
-<div class="card text-center">
-  <div class="widgetTitle"><h4>Profile</h4></div>
+<img class="steamProfile" src=<%= steamData.img %> alt=<%= steamData.nick %>>
 
-  <img class="card-img-top" src=<%= img %> alt=<%=nick %>>
-  <div class="card-body">
-    <h6 class="card-title"><%= nick %></h6>
-    <p class="card-text">
-      Vous êtes niveau <%= lvl %> <br />
-      Vous avez joue <%= Number.parseFloat(gamingTime / 60).toPrecision(4) %>h
-      en tout
-    </p>
+<div class="row marginLeft2">
+  <div class="row col-12">
+    Profile de: <%= steamData.nick %>
+  </div>
+  <div class="row col-12">
+    Niveau: <%= steamData.lvl %>
+  </div>
+  <div class="row col-12">
+    Temps de jeux total: <%= steamData.gamingTime / 60 %>H
   </div>
 </div>

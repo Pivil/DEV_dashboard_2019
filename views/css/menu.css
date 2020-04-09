@@ -3,12 +3,12 @@
   height: 100em;
 }
 
-.widget {
-  margin: 2em;
+.marginLeft2 {
+  margin-left: 2em;
 }
-
 .card {
   margin-bottom: 1em;
+  width: 20em!important;
 }
 
 .widgetTitle {
@@ -19,9 +19,8 @@
   margin:2em;
 }
 
-.column {
-  margin-left: 5em;
-}
+
+
 .card-columns {
   @include media-breakpoint-only(lg) {
     column-count: 4;

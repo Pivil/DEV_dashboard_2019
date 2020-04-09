@@ -46,13 +46,13 @@ function cleanSum(summary) {
 }
 
 function compare(a, b) {
-  return (b.playTime - a.playTime)
+  return b.playTime - a.playTime;
 }
 
 async function getSteamInfo(profile) {
   return new Promise(function (resolve, reject) {
-    steam_2.resolve("https://steamcommunity.com/id/"+profile).then(id => {
-      // id = '76561198180216413'
+    steam_2.resolve("https://steamcommunity.com/id/" + profile).then(id => {
+      var steamData = Object;
       steam_2.getUserSummary(id).then(summary => {
         getSteamLvl(summary.steamID).then(lvl => {
           summary.level = lvl;
@@ -73,7 +73,7 @@ async function getSteamInfo(profile) {
                 return summary;
               });
               summary.mostPlayed_recent = summary.games;
-              summary.games.sort((a, b) => compare(a, b))
+              summary.games.sort((a, b) => compare(a, b));
               getUserOwnedGames(id).then(data => {
                 summary.ownedGames = 0;
                 summary.gamingTime = 0;
@@ -87,9 +87,9 @@ async function getSteamInfo(profile) {
                   summary.allGames.push(game);
                   summary.gamingTime += game.playTime;
                   summary.ownedGames++;
-                  return summary
+                  return summary;
                 });
-                summary.allGames.sort((a, b) => compare(a, b))
+                summary.allGames.sort((a, b) => compare(a, b));
                 summary = cleanSum(summary);
                 resolve(summary);
               });

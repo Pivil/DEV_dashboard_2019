@@ -4,35 +4,104 @@ const weather = require("./backend/weather.js");
 const steam = require("./backend/steam");
 const editJsonFile = require("edit-json-file");
 var bodyParser = require("body-parser");
+const expressip = require("express-ip");
+var expressLayouts = require("express-ejs-layouts");
 
 
-file = editJsonFile("./about.json", {
+configFile = editJsonFile("./config.json", {
   autosave: true
 });
 
+aboutFile = editJsonFile("./about.json", {
+  autosave: true
+});
 
 app.set("view engine", "ejs");
+app.use(expressLayouts);
 app.use(express.static(__dirname));
-
+app.use(expressip().getIpInfoMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", function(req, res) {
-  var weatherShow = file.get("weather.show");
-    if (weatherShow == true) {
-      var weatherData = weather.getWeather(file.get("weather.city"));
-    } else {
-      weatherData == null;
-    }
+// app.get("/", function(req, res) {
+// var weatherShow = file.get("weather.show");
+// if (weatherShow == true) {
+//   var weatherData = weather.getWeather(file.get("weather.city"));
+// } else {
+//   weatherData == null;
+// }
 
-  res.render("pages/home", { weatherData: weatherData});
+// res.render("pages/home", { weatherData: weatherData });
+// aboutFile.set("client", {
+//   host: req.ipInfo.error != null ? "localhost" : req.ipInfo.ip
+// });
+
+// aboutFile.set("server", {
+//   current_time: Date.now()
+// });
+// res.render("pages/dashboard");
+// });
+
+app.get("/", function (req, res) {
+  var city = configFile.get("weather.city");
+  var profile = configFile.get("steam.profile");
+
+  weather.getWeather(city).then(weatherData => {
+    steam.getSteamInfo(profile).then(tmp => {
+      var steamData = Object;
+      steamData.nick = tmp.nickname;
+      steamData.real = tmp.realName;
+      steamData.country = tmp.countryCode;
+      steamData.lvl = tmp.level;
+      steamData.nbrFriends = tmp.friends;
+      steamData.img = tmp.avatar.medium;
+
+      steamData.game_name_1 = tmp.games[0].name;
+      steamData.game_img_1 = tmp.games[0].img;
+      steamData.game_playTime_1 = tmp.games[0].playTime;
+      steamData.game_name_2 = tmp.games[1].name;
+      steamData.game_img_2 = tmp.games[1].img;
+      steamData.game_playTime_2 = tmp.games[1].playTime;
+      steamData.game_name_3 = tmp.games[2].name;
+      steamData.game_img_3 = tmp.games[2].img;
+      steamData.game_playTime_3 = tmp.games[2].playTime;
+
+      steamData.mostPlayed_recent_name_1 = tmp.mostPlayed_recent[0].name;
+      steamData.mostPlayed_recent_img_1 = tmp.mostPlayed_recent[0].img;
+      steamData.mostPlayed_recent_playTime_1 =
+        tmp.mostPlayed_recent[0].playTime;
+      steamData.mostPlayed_recent_name_2 = tmp.mostPlayed_recent[1].name;
+      steamData.mostPlayed_recent_img_2 = tmp.mostPlayed_recent[1].img;
+      steamData.mostPlayed_recent_playTime_2 =
+        tmp.mostPlayed_recent[1].playTime;
+      steamData.mostPlayed_recent_name_3 = tmp.mostPlayed_recent[2].name;
+      steamData.mostPlayed_recent_img_3 = tmp.mostPlayed_recent[2].img;
+      steamData.mostPlayed_recent_playTime_3 =
+        tmp.mostPlayed_recent[2].playTime;
+
+      steamData.ownedGames_name_1 = tmp.allGames[0].name;
+      steamData.ownedGames_img_1 = tmp.allGames[0].img;
+      steamData.ownedGames_playTime_1 = tmp.allGames[0].playTime;
+      steamData.ownedGames_name_2 = tmp.allGames[1].name;
+      steamData.ownedGames_img_2 = tmp.allGames[1].img;
+      steamData.ownedGames_playTime_2 = tmp.allGames[1].playTime;
+      steamData.ownedGames_name_3 = tmp.allGames[2].name;
+      steamData.ownedGames_img_3 = tmp.allGames[2].img;
+      steamData.ownedGames_playTime_3 = tmp.allGames[2].playTime;
+
+      steamData.gamingTime = tmp.gamingTime;
+      steamData.totalGames = tmp.ownedGames;
+      res.render("pages/dashboard", {
+        weatherData: weatherData,
+        steamData: steamData
+      });
+    });
+  });
 });
 
-app.get("/config", function(req, res) {
-  var weatherCity = file.get("weather.city");
-  var steamProfile = file.get("steam.profile");
-
-
+app.get("/config", function (req, res) {
+  var weatherCity = configFile.get("weather.city");
+  var steamProfile = configFile.get("steam.profile");
 
   res.render("pages/config", {
     weatherCity: weatherCity,
@@ -40,23 +109,22 @@ app.get("/config", function(req, res) {
   });
 });
 
-app.post("/submit_form", function(req, res) {
-  console.log(req.body);
+app.post("/submit_form", function (req, res) {
   var weatherCity = req.body.weatherCity,
-    weatherShow = req.body.weatherShow == 'on' ? true : false,
+    weatherShow = req.body.weatherShow == "on" ? true : false,
     steamProfile = req.body.steamProfile;
-  file.set("weather", {
+  configFile.set("weather", {
     city: weatherCity,
     show: weatherShow
-  })
-  file.set("steam", {
+  });
+  configFile.set("steam", {
     profile: steamProfile
-  })
+  });
   res.redirect("/config");
 });
 
-app.get("/weather", function(req, res) {
-  var city = file.get("weather.city");
+app.get("/weather", function (req, res) {
+  var city = configFile.get("weather.city");
   weather.getWeather(city).then(data => {
     var temp = data.main.temp;
     var city = data.name;
@@ -64,10 +132,9 @@ app.get("/weather", function(req, res) {
   });
 });
 
-app.get("/Steam", function(req, res) {
-  var profile = file.get("steam.profile");
+app.get("/Steam", function (req, res) {
+  var profile = configFile.get("steam.profile");
   steam.getSteamInfo(profile).then(data => {
-    console.log(data);
     res.render("pages/steam", {
       nick: data.nickname,
       real: data.realName,
@@ -112,6 +179,6 @@ app.get("/Steam", function(req, res) {
   });
 });
 
-app.listen(8080, function() {
+app.listen(8080, function () {
   console.log("Example app listening on port 8080!");
 });

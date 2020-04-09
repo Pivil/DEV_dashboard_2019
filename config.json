@@ -1,0 +1,9 @@
+{
+  "weather": {
+    "city": "Lyon",
+    "show": true
+  },
+  "steam": {
+    "profile": "lululaglue"
+  }
+}
