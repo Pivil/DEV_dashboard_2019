@@ -3,22 +3,70 @@
   height: 100em;
 }
 
-.marginLeft2 {
-  margin-left: 2em;
-}
-.card {
-  margin-bottom: 1em;
-  width: 20em!important;
-}
 
-.widgetTitle {
-  text-align: center;
+#steamProfile_info {
+  margin-left: 5em;
 }
 
 .config {
   margin:2em;
 }
 
+.right {
+  position: fixed;
+  left:0px;
+  top:1em;
+}
+
+.previewImage {
+  max-width: 9em;
+}
+
+.my-custom-scrollbar {
+position: relative;
+height: 21em;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+.epitech {
+  padding-bottom: 2em;
+}
+.steamProfile {
+  max-height: 4em;
+  max-width: 4em;
+  margin-right: 1em;
+}
+
+.blur {
+
+  filter: blur(10px);
+  
+  background-color: #ccc;
+
+
+}
+
+#topRight {
+  position: fixed;
+  right: 0em;
+  top: 0em;
+}
+
+#bottom {
+  position:fixed;
+  bottom:0em;
+  left: 6em;
+}
+.box {
+    position:relative;
+}
+.weather {
+    position:fixed;
+    bottom:0;
+    right:0;
+}
 
 
 .card-columns {

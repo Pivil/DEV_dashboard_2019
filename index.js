@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const weather = require("./backend/weather.js");
 const steam = require("./backend/steam");
+const epitech = require("./backend/epitech");
+const pornhub = require("./backend/pornhub");
 const editJsonFile = require("edit-json-file");
 var bodyParser = require("body-parser");
 const expressip = require("express-ip");
@@ -23,96 +25,95 @@ app.use(expressip().getIpInfoMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.get("/", function(req, res) {
-// var weatherShow = file.get("weather.show");
-// if (weatherShow == true) {
-//   var weatherData = weather.getWeather(file.get("weather.city"));
-// } else {
-//   weatherData == null;
-// }
 
-// res.render("pages/home", { weatherData: weatherData });
-// aboutFile.set("client", {
-//   host: req.ipInfo.error != null ? "localhost" : req.ipInfo.ip
-// });
-
-// aboutFile.set("server", {
-//   current_time: Date.now()
-// });
-// res.render("pages/dashboard");
-// });
 
 app.get("/", function (req, res) {
   var city = configFile.get("weather.city");
   var profile = configFile.get("steam.profile");
-
+  var pornhubSearch = configFile.get("pornhub.search");
   weather.getWeather(city).then(weatherData => {
-    steam.getSteamInfo(profile).then(tmp => {
-      var steamData = Object;
-      steamData.nick = tmp.nickname;
-      steamData.real = tmp.realName;
-      steamData.country = tmp.countryCode;
-      steamData.lvl = tmp.level;
-      steamData.nbrFriends = tmp.friends;
-      steamData.img = tmp.avatar.medium;
-
-      steamData.game_name_1 = tmp.games[0].name;
-      steamData.game_img_1 = tmp.games[0].img;
-      steamData.game_playTime_1 = tmp.games[0].playTime;
-      steamData.game_name_2 = tmp.games[1].name;
-      steamData.game_img_2 = tmp.games[1].img;
-      steamData.game_playTime_2 = tmp.games[1].playTime;
-      steamData.game_name_3 = tmp.games[2].name;
-      steamData.game_img_3 = tmp.games[2].img;
-      steamData.game_playTime_3 = tmp.games[2].playTime;
-
-      steamData.mostPlayed_recent_name_1 = tmp.mostPlayed_recent[0].name;
-      steamData.mostPlayed_recent_img_1 = tmp.mostPlayed_recent[0].img;
-      steamData.mostPlayed_recent_playTime_1 =
-        tmp.mostPlayed_recent[0].playTime;
-      steamData.mostPlayed_recent_name_2 = tmp.mostPlayed_recent[1].name;
-      steamData.mostPlayed_recent_img_2 = tmp.mostPlayed_recent[1].img;
-      steamData.mostPlayed_recent_playTime_2 =
-        tmp.mostPlayed_recent[1].playTime;
-      steamData.mostPlayed_recent_name_3 = tmp.mostPlayed_recent[2].name;
-      steamData.mostPlayed_recent_img_3 = tmp.mostPlayed_recent[2].img;
-      steamData.mostPlayed_recent_playTime_3 =
-        tmp.mostPlayed_recent[2].playTime;
-
-      steamData.ownedGames_name_1 = tmp.allGames[0].name;
-      steamData.ownedGames_img_1 = tmp.allGames[0].img;
-      steamData.ownedGames_playTime_1 = tmp.allGames[0].playTime;
-      steamData.ownedGames_name_2 = tmp.allGames[1].name;
-      steamData.ownedGames_img_2 = tmp.allGames[1].img;
-      steamData.ownedGames_playTime_2 = tmp.allGames[1].playTime;
-      steamData.ownedGames_name_3 = tmp.allGames[2].name;
-      steamData.ownedGames_img_3 = tmp.allGames[2].img;
-      steamData.ownedGames_playTime_3 = tmp.allGames[2].playTime;
-
-      steamData.gamingTime = tmp.gamingTime;
-      steamData.totalGames = tmp.ownedGames;
-      res.render("pages/dashboard", {
-        weatherData: weatherData,
-        steamData: steamData
+    epitech.getNotes().then(epitechData => {
+      pornhub.search(pornhubSearch).then(pornhubData => {
+        console.log(pornhubData);
+        res.render("pages/dashboard", {
+          layout: 'layout',
+          weatherData: weatherData,
+          // steamData: steamData,
+          epitechData: epitechData,
+          pornhubData: pornhubData.data
+        });
       });
     });
+    // steam.getSteamInfo(profile).then(tmp => {
+    //   var steamData = Object;
+    //   steamData.nick = tmp.nickname;
+    //   steamData.real = tmp.realName;
+    //   steamData.country = tmp.countryCode;
+    //   steamData.lvl = tmp.level;
+    //   steamData.nbrFriends = tmp.friends;
+    //   steamData.img = tmp.avatar.medium;
+
+    //   steamData.game_name_1 = tmp.games[0].name;
+    //   steamData.game_img_1 = tmp.games[0].img;
+    //   steamData.game_playTime_1 = tmp.games[0].playTime;
+    //   steamData.game_name_2 = tmp.games[1].name;
+    //   steamData.game_img_2 = tmp.games[1].img;
+    //   steamData.game_playTime_2 = tmp.games[1].playTime;
+    //   steamData.game_name_3 = tmp.games[2].name;
+    //   steamData.game_img_3 = tmp.games[2].img;
+    //   steamData.game_playTime_3 = tmp.games[2].playTime;
+
+    //   steamData.mostPlayed_recent_name_1 = tmp.mostPlayed_recent[0].name;
+    //   steamData.mostPlayed_recent_img_1 = tmp.mostPlayed_recent[0].img;
+    //   steamData.mostPlayed_recent_playTime_1 =
+    //     tmp.mostPlayed_recent[0].playTime;
+    //   steamData.mostPlayed_recent_name_2 = tmp.mostPlayed_recent[1].name;
+    //   steamData.mostPlayed_recent_img_2 = tmp.mostPlayed_recent[1].img;
+    //   steamData.mostPlayed_recent_playTime_2 =
+    //     tmp.mostPlayed_recent[1].playTime;
+    //   steamData.mostPlayed_recent_name_3 = tmp.mostPlayed_recent[2].name;
+    //   steamData.mostPlayed_recent_img_3 = tmp.mostPlayed_recent[2].img;
+    //   steamData.mostPlayed_recent_playTime_3 =
+    //     tmp.mostPlayed_recent[2].playTime;
+
+    //   steamData.ownedGames_name_1 = tmp.allGames[0].name;
+    //   steamData.ownedGames_img_1 = tmp.allGames[0].img;
+    //   steamData.ownedGames_playTime_1 = tmp.allGames[0].playTime;
+    //   steamData.ownedGames_name_2 = tmp.allGames[1].name;
+    //   steamData.ownedGames_img_2 = tmp.allGames[1].img;
+    //   steamData.ownedGames_playTime_2 = tmp.allGames[1].playTime;
+    //   steamData.ownedGames_name_3 = tmp.allGames[2].name;
+    //   steamData.ownedGames_img_3 = tmp.allGames[2].img;
+    //   steamData.ownedGames_playTime_3 = tmp.allGames[2].playTime;
+
+    //   steamData.gamingTime = tmp.gamingTime;
+    //   steamData.totalGames = tmp.ownedGames;
+
+
+    // });
   });
 });
 
 app.get("/config", function (req, res) {
   var weatherCity = configFile.get("weather.city");
   var steamProfile = configFile.get("steam.profile");
+  var pornhubSearch = configFile.get("pornhub.search");
 
   res.render("pages/config", {
+    layout: "layoutMenu",
     weatherCity: weatherCity,
-    steamProfile: steamProfile
+    steamProfile: steamProfile,
+    pornhubSearch: pornhubSearch
   });
 });
+
 
 app.post("/submit_form", function (req, res) {
   var weatherCity = req.body.weatherCity,
     weatherShow = req.body.weatherShow == "on" ? true : false,
-    steamProfile = req.body.steamProfile;
+    steamProfile = req.body.steamProfile,
+    pornubSearch = req.body.pornhubSearch;
+
   configFile.set("weather", {
     city: weatherCity,
     show: weatherShow
@@ -120,8 +121,17 @@ app.post("/submit_form", function (req, res) {
   configFile.set("steam", {
     profile: steamProfile
   });
-  res.redirect("/config");
+  configFile.set("pornhub", {
+    search: pornhubSearch
+  })
+  res.redirect("/");
 });
+
+app.get("/epitech", function (req, res) {
+  epitech.getNotes().then(data => {
+    console.log(data);
+  })
+})
 
 app.get("/weather", function (req, res) {
   var city = configFile.get("weather.city");

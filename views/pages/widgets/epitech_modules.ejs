@@ -1,0 +1,25 @@
+<h3>Epitech</h3>
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped mb-0">
+        <thead>
+            <tr>
+                <th scope="col">Module</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Credits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let index = 0; index < epitechData.length; index++ ) { %>
+            <tr>
+                <td><%= epitechData[index].moduleName %> </td>
+                <td><%= epitechData[index].grade %></td>
+                <td><%= epitechData[index].credits %></td>
+            </tr>
+            <% } %>
+            <tr>
+                <td><b>Mes crédits:</b></td>
+                <td><%= epitechData.creditObtenus %> / <%= epitechData.totalCredit %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

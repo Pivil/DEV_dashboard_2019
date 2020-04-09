@@ -1,6 +1,6 @@
 version: "3"
 services:
   server: 
-    image: pivil/epitech:server
+    image: pivil/server
     ports:
       - "8080:8080"

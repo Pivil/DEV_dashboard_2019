@@ -1,24 +1,31 @@
 <%- include('partials/header'); %> <%- include('partials/menu') %>
-<div class="row" style="border: solid 1px black">
-  <div class="row col-6">
-    <%- steamProfile %>
-  </div>
-  <div class="row col-6">
-    <%- steamGames %>
-  </div>
-</div>
-<div class="row">
-  <div class="row col-10">
-    <canvas id="pie-chart" width="800" height="450"></canvas>
-
-  </div>
-  <div class="row col-2" style="border: solid 1px blue">
-    <%- weather %>
-
-  </div>
-
+<h3>Pornhub</h3>
+<div id="pornhub" class="row col-8 blur">
+  <%- pornhub %>
 </div>
 
+<div id="bottom">
+  <div class="row">
+    <%# steamProfile %>
+    <%# steamGames %>
+  </div>
+</div>
+
+<div id="topRight">
+  <%- weather %>
+  <%- epitech %>
+
+</div>
 
 
 <%- body %>
+
+<script>
+  const pornhub = document.getElementById("pornhub");
+  pornhub.addEventListener('click', function (e) {
+    if (pornhub.classList.contains('blur'))
+      pornhub.classList.remove('blur');
+    else
+      pornhub.classList.add('blur');
+  })
+</script>

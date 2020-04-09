@@ -1,0 +1,21 @@
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered table-striped mb-0">
+        <thead>
+            <tr>
+                <th scope="col">Titre pour</th>
+                <th scope="col">Preview</th>
+                <th scope="col">Url</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let i = 0; i < pornhubData.length; i++ ) { %>
+            <tr>
+                <td><%= pornhubData[i].title %> </td>
+                <td><img class="previewImage" src=<%= pornhubData[i].preview %> /> </td>
+                <td><a href=<%= pornhubData[i].url %>>Lien</a></td>
+            </tr>
+            <% } %>
+
+        </tbody>
+    </table>
+</div>

@@ -1,13 +1,7 @@
 <img class="steamProfile" src=<%= steamData.img %> alt=<%= steamData.nick %>>
 
-<div class="row marginLeft2">
-  <div class="row col-12">
-    Profile de: <%= steamData.nick %>
-  </div>
-  <div class="row col-12">
-    Niveau: <%= steamData.lvl %>
-  </div>
-  <div class="row col-12">
-    Temps de jeux total: <%= steamData.gamingTime / 60 %>H
-  </div>
+<div>
+  Profile de: <%= steamData.nick %> <br />
+  Niveau: <%= steamData.lvl %><br />
+  Temps de jeux total: <%= Number.parseFloat(steamData.gamingTime / 60).toFixed(2) %>H
 </div>
