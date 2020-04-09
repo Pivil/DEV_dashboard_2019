@@ -1,35 +1,64 @@
 <%- include('../partials/menu'); %>
 <form action="/submit_form" method="post">
-   <div class="row">
+    <div class="row">
         <div class="card config">
-
             <h3>Weather</h3>
             <div class="form-group row">
                 <label for="weatherCity" class="col-sm-3 col-form-label">Ville:</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="weatherCity" name="weatherCity" value=<%= weatherCity %>>  
+                    <input type="text" class="form-control" id="weatherCity" name="weatherCity"
+                        value=<%= weatherCity %>>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="weatherShow">Afficher sur le dashboard </label>
-                <div class="col-sm-1">
-                    <input type="checkbox" id="weatherShow" name="weatherShow">
-                </div>
-            </div>
+
         </div>
 
         <div class="card config">
             <h3>Steam</h3>
             <div class="form-group row">
-                <label for="steamProfile" class="col-sm-3 col-form-label">Profile:</label>
+                <label for="steamProfile" class="col-sm-3 col-form-label">Profile</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="steamProfile" name="steamProfile" value=<%= steamProfile %>>  
+                    <input type="text" class="form-control" id="steamProfile" name="steamProfile"
+                        value=<%= steamProfile %>>
                 </div>
             </div>
         </div>
 
-  
-    </div> 
+        <div class="card config">
+            <h3>Pornhub</h3>
+            <div class="form-group row">
+                <label for="pornhubSearch" class="col-sm-3 col-form-label">Search</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="pornhubSearch" name="pornhubSearch"
+                        value=<%= pornhubSearch %>>
+                </div>
+            </div>
+        </div>
+
+        <div class="card config">
+            <h3>Horoscope</h3>
+            <div class="form-group row">
+                <label for="horoscopeSign" class="col-sm-3 col-form-label">Sign</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="horoscopeSign" name="horoscopeSign"
+                        value=<%= horoscopeSign %>>
+                </div>
+            </div>
+        </div>
+
+        <div class="card config">
+            <h3>Epitech</h3>
+            <div class="form-group row">
+                <label for="epitechAuth" class="col-sm-3 col-form-label">Auth</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="epitechAuth" name="epitechAuth"
+                        value=<%= epitechAuth %>>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <button type="submit">Enregistrer</button>
 
 </form>

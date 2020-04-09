@@ -2,7 +2,6 @@
   "client": {
     "host": "localhost"
   },
-
   "server": {
     "current_time": 1586109063112,
     "services": [
@@ -38,6 +37,49 @@
             "params": [
               {
                 "profile": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "pornhub",
+        "widgets": [
+          {
+            "name": "pornhub",
+            "description": "Display search result",
+            "params": [
+              {
+                "search": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "horoscope",
+        "widgets": [
+          {
+            "name": "dailyHoroscope",
+            "description": "Display daily horoscope for a sign",
+            "params": [
+              {
+                "sign": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "epitech",
+        "widgets": [
+          {
+            "name": "modules",
+            "description": "Display grades and credits for each modules",
+            "url": "https://intra.epitech.eu/admin/autolog",
+            "params": [
+              {
+                "auth": "string"
               }
             ]
           }

@@ -1,10 +1,10 @@
 const fetch = require("node-fetch");
 
 
-async function getNotes(city) {
+async function getNotes(auth) {
     return new Promise(function (resolve, reject) {
         let url =
-            "https://intra.epitech.eu/auth-72fd8f35d58584abc436b48a00366649b3ab685a/user/remi.pontonnier@epitech.eu/notes?format=json"
+            "https://intra.epitech.eu/" + auth + "/user/remi.pontonnier@epitech.eu/notes?format=json"
         fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }

@@ -8,5 +8,11 @@
   },
   "pornhub": {
     "search": "Lucien Sigayret"
+  },
+  "horoscope": {
+    "sign": "aquarius"
+  },
+  "epitech": {
+    "auth": "auth-72fd8f35d58584abc436b48a00366649b3ab685a"
   }
 }

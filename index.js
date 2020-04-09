@@ -4,6 +4,7 @@ const weather = require("./backend/weather.js");
 const steam = require("./backend/steam");
 const epitech = require("./backend/epitech");
 const pornhub = require("./backend/pornhub");
+const horoscope = require("./backend/horoscope");
 const editJsonFile = require("edit-json-file");
 var bodyParser = require("body-parser");
 const expressip = require("express-ip");
@@ -31,8 +32,10 @@ app.get("/", function (req, res) {
   var city = configFile.get("weather.city");
   var profile = configFile.get("steam.profile");
   var pornhubSearch = configFile.get("pornhub.search");
+  var horoscopeSign = configFile.get("horoscope.sign");
+  var epitechAuth = configFile.get("epitech.auth");
   weather.getWeather(city).then(weatherData => {
-    epitech.getNotes().then(epitechData => {
+    epitech.getNotes(epitechAuth).then(epitechData => {
       steam.getSteamInfo(profile).then(tmp => {
         var steamData = Object;
         steamData.nick = tmp.nickname;
@@ -75,29 +78,37 @@ app.get("/", function (req, res) {
         steamData.gamingTime = tmp.gamingTime;
         steamData.totalGames = tmp.ownedGames;
         pornhub.search(pornhubSearch).then(pornhubData => {
-          res.render("pages/dashboard", {
-            layout: 'layout',
-            weatherData: weatherData,
-            steamData: steamData,
-            epitechData: epitechData,
-            pornhubData: pornhubData.data
-          });
+          horoscope.getDaily(horoscopeSign).then(horoscopeData => {
+            res.render("pages/dashboard", {
+              layout: 'layout',
+              weatherData: weatherData,
+              steamData: steamData,
+              epitechData: epitechData,
+              pornhubData: pornhubData.data,
+              horoscopeData: horoscopeData
+            });
+          })
         });
       });
     });
   });
 });
 
+
 app.get("/config", function (req, res) {
   var weatherCity = configFile.get("weather.city");
   var steamProfile = configFile.get("steam.profile");
   var pornhubSearch = configFile.get("pornhub.search");
+  var horoscopeSign = configFile.get("horoscope.sign");
+  var epitechAuth = configFile.get("epitech.auth");
 
   res.render("pages/config", {
     layout: "layoutMenu",
     weatherCity: weatherCity,
     steamProfile: steamProfile,
-    pornhubSearch: pornhubSearch
+    pornhubSearch: pornhubSearch,
+    horoscopeSign: horoscopeSign,
+    epitechAuth: epitechAuth
   });
 });
 
@@ -106,7 +117,9 @@ app.post("/submit_form", function (req, res) {
   var weatherCity = req.body.weatherCity,
     weatherShow = req.body.weatherShow == "on" ? true : false,
     steamProfile = req.body.steamProfile,
-    pornubSearch = req.body.pornhubSearch;
+    pornhubSearch = req.body.pornhubSearch,
+    horoscopeSign = req.body.horoscopeSign,
+    epitechAuth = req.body.epitechAuth;
 
   configFile.set("weather", {
     city: weatherCity,
@@ -117,6 +130,12 @@ app.post("/submit_form", function (req, res) {
   });
   configFile.set("pornhub", {
     search: pornhubSearch
+  });
+  configFile.set("horoscope", {
+    sign: horoscopeSign
+  });
+  configFile.set("epitech", {
+    auth: epitechAuth
   })
   res.redirect("/");
 });
