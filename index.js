@@ -36,10 +36,13 @@ app.get("/", async function (req, res) {
   var epitechAuth = configFile.get("epitech.auth");
   weatherData = await weather.getWeather(city);
   epitechData = await epitech.getNotes(epitechAuth);
-  steamData = await steam.getSteamInfo(profile);
+  try {
+    steamData = await steam.getSteamInfo(profile);
+  } catch (err) {
+    steamData = null;
+  };
   pornhubData = await pornhub.search(pornhubSearch);
   horoscopeData = await horoscope.getDaily(horoscopeSign);
-  console.log(steamData.level);
   res.render("pages/dashboard", {
     layout: 'layout',
     weatherData: weatherData,

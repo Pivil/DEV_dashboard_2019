@@ -97,6 +97,8 @@ async function getSteamInfo(profile) {
           });
         });
       });
+    }).catch(err => {
+      reject("ERROR ", err);
     });
   });
 }
