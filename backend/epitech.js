@@ -27,7 +27,6 @@ async function getNotes(auth) {
                     }
 
                 });
-                // console.log(json);
                 data["totalCredit"] = totalCredit;
                 data["creditObtenus"] = obtenus;
                 resolve(data);
