@@ -4,9 +4,15 @@
   <div class="row col-5 ">
     <%- pornhub %>
   </div>
-  <div class="row col-4 ">
+  <div class="row col-4">
     <%- horoscope %>
   </div>
+</div>
+
+<div class="row">
+  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+  <p draggable="true" ondragstart="drag(event)" width="336" height="69">coucou</p>
 </div>
 <div id="bottom">
   <div class="row">
@@ -32,4 +38,19 @@
     else
       pornhub.classList.add('blur');
   })
+
+
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
 </script>

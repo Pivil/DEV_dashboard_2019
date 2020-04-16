@@ -1,6 +1,10 @@
+<% if (steamData != null) { %>
+
 <h4>Jeux récents</h4>
 <ul class="list-inline">
-  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent_img_1 %> /> </li>
-  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent_img_2 %> /></li>
-  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent_img_3 %> /></li>
+  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent[0].img %> /> </li>
+  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent[1].img %> /></li>
+  <li class="list-inline-item"><img src=<%= steamData.mostPlayed_recent[2].img %> /></li>
 </ul>
+
+<% } %>

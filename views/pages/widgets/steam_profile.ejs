@@ -1,7 +1,9 @@
-<img class="steamProfile" src=<%= steamData.img %> alt=<%= steamData.nick %>>
+<% if (steamData != null) { %>
+<img class="steamProfile" src=<%= steamData.avatar.medium %> alt=<%= steamData.nick %>>
 
 <div>
-  Profile de: <%= steamData.nick %> <br />
-  Niveau: <%= steamData.lvl %><br />
+  Profile de: <%= steamData.nickname %> <br />
+  Niveau: <%= steamData.level %><br />
   Temps de jeux total: <%= Number.parseFloat(steamData.gamingTime / 60).toFixed(2) %>H
 </div>
+<% } %>
