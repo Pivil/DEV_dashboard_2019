@@ -171,7 +171,7 @@ app.get("/login", function (req, res) {
   })
 })
 
-app.post("/submit_login"), function (req, res) {
+app.post("/submit_login", function (req, res) {
   var mail = req.body.mail;
   var mdp = req.body.mdp;
 
@@ -181,7 +181,7 @@ app.post("/submit_login"), function (req, res) {
   })
 
   res.redirect("/config")
-}
+})
 
 app.get("/weather", function (req, res) {
   var city = configFile.get("weather.city");
