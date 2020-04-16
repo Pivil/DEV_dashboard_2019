@@ -16,7 +16,12 @@
     "auth": "auth-72fd8f35d58584abc436b48a00366649b3ab685a"
   },
   "user": {
+<<<<<<< HEAD
+    "mail": "aze",
+    "mdp": ""
+=======
     "mail": "mail",
     "mdp": "mdp"
+>>>>>>> f36d5649d283162fbd70cb854980e1f9b771568c
   }
 }

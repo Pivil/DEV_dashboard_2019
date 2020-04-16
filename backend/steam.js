@@ -52,54 +52,58 @@ function compare(a, b) {
 
 async function getSteamInfo(profile) {
   return new Promise(function (resolve, reject) {
-    steam_2.resolve("https://steamcommunity.com/id/" + profile).then(id => {
-      steam_2.getUserSummary(id).then(summary => {
-        getSteamLvl(summary.steamID).then(lvl => {
-          summary.level = lvl;
-          getSteamFriends(id).then(friends => {
-            summary.friends = 0;
-            friends.map((value, index) => {
-              summary.friends++;
-            });
-            getUserRecentGames(id).then(games => {
-              summary.games = [];
-              games.map((value, index) => {
-                var game = {
-                  name: value.name,
-                  img: value.logoURL,
-                  playTime: value.playTime
-                };
-                summary.games.push(game);
-                return summary;
+    if (profile != "") {
+      steam_2.resolve("https://steamcommunity.com/id/" + profile).then(id => {
+        steam_2.getUserSummary(id).then(summary => {
+          getSteamLvl(summary.steamID).then(lvl => {
+            summary.level = lvl;
+            getSteamFriends(id).then(friends => {
+              summary.friends = 0;
+              friends.map((value, index) => {
+                summary.friends++;
               });
-              summary.mostPlayed_recent = summary.games;
-              summary.games.sort((a, b) => compare(a, b));
-              getUserOwnedGames(id).then(data => {
-                summary.ownedGames = 0;
-                summary.gamingTime = 0;
-                summary.allGames = [];
-                data.map((value, index) => {
+              getUserRecentGames(id).then(games => {
+                summary.games = [];
+                games.map((value, index) => {
                   var game = {
                     name: value.name,
                     img: value.logoURL,
                     playTime: value.playTime
                   };
-                  summary.allGames.push(game);
-                  summary.gamingTime += game.playTime;
-                  summary.ownedGames++;
+                  summary.games.push(game);
                   return summary;
                 });
-                summary.allGames.sort((a, b) => compare(a, b));
-                summary = cleanSum(summary);
-                resolve(summary);
+                summary.mostPlayed_recent = summary.games;
+                summary.games.sort((a, b) => compare(a, b));
+                getUserOwnedGames(id).then(data => {
+                  summary.ownedGames = 0;
+                  summary.gamingTime = 0;
+                  summary.allGames = [];
+                  data.map((value, index) => {
+                    var game = {
+                      name: value.name,
+                      img: value.logoURL,
+                      playTime: value.playTime
+                    };
+                    summary.allGames.push(game);
+                    summary.gamingTime += game.playTime;
+                    summary.ownedGames++;
+                    return summary;
+                  });
+                  summary.allGames.sort((a, b) => compare(a, b));
+                  summary = cleanSum(summary);
+                  resolve(summary);
+                });
               });
             });
           });
         });
+      }).catch(err => {
+        reject("ERROR ", err);
       });
-    }).catch(err => {
-      reject("ERROR ", err);
-    });
+    } else {
+      reject('err');
+    }
   });
 }
 
