@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 
 
-app.get("/", async function (req, res) {
+app.get("/home", async function (req, res) {
   var city = configFile.get("weather.city");
   var profile = configFile.get("steam.profile");
   var pornhubSearch = configFile.get("pornhub.search");
@@ -163,7 +163,7 @@ app.get("/epitech", function (req, res) {
   })
 })
 
-app.get("/login", function (req, res) {
+app.get("/", function (req, res) {
   res.render("pages/login", {
     layout: "layoutMenu",
     mail: configFile.get("user.mail"),
