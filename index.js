@@ -163,6 +163,26 @@ app.get("/epitech", function (req, res) {
   })
 })
 
+app.get("/login", function (req, res) {
+  res.render("pages/login", {
+    layout: "layoutMenu",
+    mail: configFile.get("user.mail"),
+    mdp: configFile.get("user.mdp")
+  })
+})
+
+app.post("/submit_login"), function (req, res) {
+  var mail = req.body.mail;
+  var mdp = req.body.mdp;
+
+  configFile.set("user", {
+    mail: mail,
+    mdp: mdp
+  })
+
+  res.redirect("/config")
+}
+
 app.get("/weather", function (req, res) {
   var city = configFile.get("weather.city");
   weather.getWeather(city).then(data => {

@@ -1,21 +1,18 @@
 <%- include('../partials/menu'); %>
-<form action="/submit_form" method="post">
+<form action="/submit_login" method="post">
   <div class="row">
     <div class="card config">
       <h3>Mail</h3>
       <div class="form-group row">
-        <label for="weatherCity" class="col-sm-3 col-form-label">Mail</label>
         <div class="col-sm-7">
           <input type="text" class="form-control" id="mail" name="mail" value=<%= mail %>>
         </div>
       </div>
-
     </div>
 
     <div class="card config">
       <h3>Mot de Passe</h3>
       <div class="form-group row">
-        <label for="steamProfile" class="col-sm-3 col-form-label">MdP</label>
         <div class="col-sm-7">
           <input type="password" class="form-control" id="mdp" name="mdp" value=<%= mdp %>>
         </div>
